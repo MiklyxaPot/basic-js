@@ -1,3 +1,4 @@
+const { isString } = require('@vue/shared');
 const { NotImplementedError } = require('../extensions/index.js');
 
 const MODERN_ACTIVITY = 15;
@@ -17,9 +18,13 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function dateSample(data) {
+//   throw new NotImplementedError('Not implemented');
+   if(isString(data) &&  +data >0 && +data <= 15 && !isNaN(data)){
+      let result = (Math.log( MODERN_ACTIVITY/data))/ (0.693/HALF_LIFE_PERIOD );
+      return Math.ceil(result);
+   }return false;
+
 }
 
 module.exports = {
